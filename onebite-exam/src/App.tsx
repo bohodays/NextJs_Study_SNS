@@ -5,6 +5,38 @@ import { Input } from "./components/ui/input";
 import { Toaster } from "./components/ui/sonner";
 import { Textarea } from "./components/ui/textarea";
 import { cn } from "./lib/utils";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { ChefHat } from "lucide-react";
 
 function App() {
   const isActive = true;
@@ -90,6 +122,66 @@ function App() {
       <div className="p-5">
         <Toaster />
       </div>
+
+      {/* 11. shadcn carousel */}
+      <Carousel className="mx-10">
+        <CarouselContent>
+          <CarouselItem className="basis-1/3">1</CarouselItem>
+          <CarouselItem className="basis-1/3">2</CarouselItem>
+          <CarouselItem className="basis-1/3">3</CarouselItem>
+          <CarouselItem className="basis-1/3">4</CarouselItem>
+          <CarouselItem className="basis-1/3">5</CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+
+      {/* 12. shadcn popover */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button>Open</Button>
+        </PopoverTrigger>
+        <PopoverContent>Place content for the popover here.</PopoverContent>
+      </Popover>
+
+      {/* 12. shadcd dialog */}
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* 13. shadcd alert dialog */}
+      <AlertDialog>
+        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => console.log("cancel")}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={() => console.log("action")}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* 14. shadcd lucide */}
+      <ChefHat className="h-10 w-10 fill-red-500 text-blue-500" />
     </div>
   );
 }
