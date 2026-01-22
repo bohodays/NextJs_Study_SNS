@@ -4,6 +4,7 @@ import IndexPage from "./pages/index-page";
 import SingInPage from "./pages/sign-in-page";
 import SignUpPage from "./pages/sign-up-page";
 import CounterPage from "./pages/counter-page";
+import TodoListPage from "./pages/todo-list-page";
 
 const AuthLayout = () => {
   return (
@@ -19,6 +20,7 @@ function App() {
     <Routes>
       <Route path="/" element={<IndexPage />} />
       <Route path="/counter" element={<CounterPage />} />
+      <Route path="/todolist" element={<TodoListPage />} />
       <Route element={<AuthLayout />}>
         <Route path="/sign-in" element={<SingInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
