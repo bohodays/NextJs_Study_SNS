@@ -16,6 +16,7 @@ const useTodosStore = create(
             state.todos.push({
               id: new Date().getTime().toString(),
               content,
+              isDone: false,
             });
           });
         },
