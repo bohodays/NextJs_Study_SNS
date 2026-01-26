@@ -3,7 +3,7 @@
     {
       "id": "1",
       "content": "TODO 1",
-      "isDone": true
+      "isDone": false
     },
     {
       "id": "7baf",
@@ -28,11 +28,6 @@
     {
       "id": "96b9",
       "content": "TODO 6",
-      "isDone": false
-    },
-    {
-      "id": "4f2a",
-      "content": "TODO 7",
       "isDone": false
     }
   ]

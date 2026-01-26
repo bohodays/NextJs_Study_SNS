@@ -16,10 +16,22 @@ export function useCreateTodoMutation() {
       //     queryKey: QUERY_KEYS.todo.list, // 기존의 쿼리키를 가지고 있는 데이터를 무효화시켜서 다시 fetch하도록 동작함
       //   });
 
-      queryClient.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
-        if (!prevTodos) return [newTodo];
-        return [...prevTodos, newTodo];
-      });
+      // queryClient.setQueryData<Todo[]>(QUERY_KEYS.todo.list, (prevTodos) => {
+      //   if (!prevTodos) return [newTodo];
+      //   return [...prevTodos, newTodo];
+      // });
+
+      queryClient.setQueryData<Todo>(
+        QUERY_KEYS.todo.detail(newTodo.id),
+        newTodo,
+      );
+      queryClient.setQueryData<string[]>(
+        QUERY_KEYS.todo.list,
+        (prevTodoIds) => {
+          if (!prevTodoIds) return [newTodo.id];
+          return [...prevTodoIds, newTodo.id];
+        },
+      );
     }, // 요청이 성공했을 때, 이벤트 핸들러
     onError: (error) => {
       window.alert(error.message);
