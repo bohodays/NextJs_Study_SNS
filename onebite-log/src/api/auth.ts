@@ -41,3 +41,21 @@ export const signInWithOAuth = async (provider: Provider) => {
   if (error) throw error;
   return data;
 };
+
+export const requestPasswordResetEmail = async (email: string) => {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${import.meta.env.VITE_PUBLIC_URL}/reset-password`,
+  });
+
+  if (error) throw error;
+  return data;
+};
+
+export const updatePassword = async (password: string) => {
+  const { data, error } = await supabase.auth.updateUser({
+    password,
+  });
+
+  if (error) throw error;
+  return data;
+};
