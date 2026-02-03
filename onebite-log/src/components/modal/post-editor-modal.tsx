@@ -81,6 +81,8 @@ const PostEditorModal = () => {
         (prevImage) => prevImage.previewUrl !== image.previewUrl,
       ),
     );
+
+    URL.revokeObjectURL(image.previewUrl);
   };
 
   useEffect(() => {
@@ -94,7 +96,12 @@ const PostEditorModal = () => {
 
   useEffect(() => {
     // 편의기능 2
-    if (!isOpen) return;
+    if (!isOpen) {
+      images.forEach((image) => {
+        URL.revokeObjectURL(image.previewUrl);
+      });
+      return;
+    }
     textareaRef.current?.focus();
 
     // 편의기능 3
