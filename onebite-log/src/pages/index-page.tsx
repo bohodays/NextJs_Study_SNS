@@ -1,10 +1,11 @@
 import CreatePostButton from "@/components/post/create-post-button";
-import React from "react";
+import PostFeed from "@/components/post/post-feed";
 
 const IndexPage = () => {
   return (
     <div className="flex flex-col gap-10">
       <CreatePostButton />
+      <PostFeed />
     </div>
   );
 };
