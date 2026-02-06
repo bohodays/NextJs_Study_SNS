@@ -1,11 +1,21 @@
-import { usePostsData } from "@/hooks/queries/use-posts-data";
-import React from "react";
 import Fallback from "../fallback";
 import Loader from "../loader";
 import PostItem from "./post-item";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts.data";
 
 const PostFeed = () => {
-  const { data, error, isPending } = usePostsData();
+  const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
+    useInfinitePostsData();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      // 데이터 추가
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (error) return <Fallback />;
 
@@ -13,9 +23,14 @@ const PostFeed = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      {data.map((post) => (
-        <PostItem key={post.id} {...post} />
-      ))}
+      {data.pages.map((page) =>
+        page.map((post) => <PostItem key={post.id} {...post} />),
+      )}
+
+      {isFetchingNextPage && <Loader />}
+
+      {/* 무한스크롤 - 최하단을 감지하기 위한 div */}
+      <div ref={ref}></div>
     </div>
   );
 };
