@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import type { PostEntity } from "@/types";
 import { useOpenEditPostModal } from "@/store/post-editor-modal";
 
-const EditPostItemButton = (props: PostEntity) => {
+const EditPostButton = (props: PostEntity) => {
   const openEditPostModal = useOpenEditPostModal();
 
   const handleButtonClick = () => {
@@ -25,4 +25,4 @@ const EditPostItemButton = (props: PostEntity) => {
   );
 };
 
-export default EditPostItemButton;
+export default EditPostButton;
