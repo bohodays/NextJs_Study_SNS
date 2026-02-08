@@ -19,6 +19,17 @@ export const fetchPosts = async ({
   return data;
 };
 
+export const fetchPostById = async (postId: number) => {
+  const { data, error } = await supabase
+    .from("post")
+    .select("*, author: profile!author_id (*)")
+    .eq("id", postId)
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
 export const createPost = async (content: string) => {
   const { data, error } = await supabase
     .from("post")
