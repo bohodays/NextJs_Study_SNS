@@ -106,3 +106,19 @@ export const deletePost = async (id: number) => {
   if (error) throw error;
   return data;
 };
+
+export const togglePostLike = async ({
+  postId,
+  userId,
+}: {
+  postId: number;
+  userId: string;
+}) => {
+  const { data, error } = await supabase.rpc("toggle_post_like", {
+    p_post_id: postId,
+    p_user_id: userId,
+  });
+
+  if (error) throw error;
+  return data;
+};
