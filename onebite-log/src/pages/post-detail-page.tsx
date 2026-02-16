@@ -6,15 +6,15 @@ import { Navigate, useParams } from "react-router";
 
 const PostDetailPage = () => {
   const params = useParams();
-  const postId = params.postId;
+  const postId = Number(params.postId);
 
   if (!postId) return <Navigate to="/" />;
 
   return (
     <div className="flex flex-col gap-5">
-      <PostItem postId={Number(postId)} type="DETAIL" />
+      <PostItem postId={postId} type="DETAIL" />
       <div className="text-xl font-bold">댓글</div>
-      <CommentEditor />
+      <CommentEditor postId={postId} />
       <CommentList />
     </div>
   );
