@@ -50,3 +50,15 @@ export const updateComment = async ({
   if (error) throw error;
   return data;
 };
+
+export const deleteComment = async (id: number) => {
+  const { data, error } = await supabase
+    .from("comment")
+    .delete()
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
