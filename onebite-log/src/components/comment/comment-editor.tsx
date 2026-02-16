@@ -17,7 +17,14 @@ type EditMode = {
   onClose: () => void;
 };
 
-type Props = CreateMode | EditMode;
+type ReplyMode = {
+  type: "REPLY";
+  postId: number;
+  parentCommentId: number;
+  onClose: () => void;
+};
+
+type Props = CreateMode | EditMode | ReplyMode;
 
 export default function CommentEditor(props: Props) {
   const [content, setContent] = useState("");
@@ -25,6 +32,7 @@ export default function CommentEditor(props: Props) {
   const { mutate: createComment, isPending: isCreateCommentPending } =
     useCreateComment({
       onSuccess: () => {
+        if (props.type === "REPLY") props.onClose();
         setContent("");
       },
       onError: (error) => {
@@ -54,14 +62,23 @@ export default function CommentEditor(props: Props) {
 
     // api 요청
     if (props.type === "CREATE") {
+      // 생성
       createComment({
         postId: props.postId,
         content,
       });
-    } else {
+    } else if (props.type === "EDIT") {
+      // 수정
       updateComment({
         id: props.commentId,
         content,
+      });
+    } else {
+      // 대댓글
+      createComment({
+        postId: props.postId,
+        content,
+        parentCommentId: props.parentCommentId,
       });
     }
   };
@@ -80,7 +97,7 @@ export default function CommentEditor(props: Props) {
         onChange={(e) => setContent(e.target.value)}
       />
       <div className="flex justify-end gap-2">
-        {props.type === "EDIT" && (
+        {(props.type === "EDIT" || props.type === "REPLY") && (
           <Button
             disabled={isPending}
             variant={"outline"}
