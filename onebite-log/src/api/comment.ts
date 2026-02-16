@@ -19,3 +19,14 @@ export const createComment = async ({
   if (error) throw error;
   return data;
 };
+
+export const fetchComments = async (postId: number) => {
+  const { data, error } = await supabase
+    .from("comment")
+    .select("*, author: profile!author_id (*)")
+    .eq("post_id", postId)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return data;
+};

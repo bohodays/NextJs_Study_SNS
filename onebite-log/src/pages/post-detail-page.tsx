@@ -1,7 +1,6 @@
 import CommentEditor from "@/components/comment/comment-editor";
 import CommentList from "@/components/comment/comment-list";
 import PostItem from "@/components/post/post-item";
-import React from "react";
 import { Navigate, useParams } from "react-router";
 
 const PostDetailPage = () => {
@@ -15,7 +14,7 @@ const PostDetailPage = () => {
       <PostItem postId={postId} type="DETAIL" />
       <div className="text-xl font-bold">댓글</div>
       <CommentEditor postId={postId} />
-      <CommentList />
+      <CommentList postId={postId} />
     </div>
   );
 };
