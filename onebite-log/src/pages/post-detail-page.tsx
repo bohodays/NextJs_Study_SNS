@@ -13,7 +13,7 @@ const PostDetailPage = () => {
     <div className="flex flex-col gap-5">
       <PostItem postId={postId} type="DETAIL" />
       <div className="text-xl font-bold">댓글</div>
-      <CommentEditor postId={postId} />
+      <CommentEditor type="CREATE" postId={postId} />
       <CommentList postId={postId} />
     </div>
   );

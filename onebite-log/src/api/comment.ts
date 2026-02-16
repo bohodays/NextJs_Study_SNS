@@ -30,3 +30,23 @@ export const fetchComments = async (postId: number) => {
   if (error) throw error;
   return data;
 };
+
+export const updateComment = async ({
+  id,
+  content,
+}: {
+  id: number;
+  content: string;
+}) => {
+  const { data, error } = await supabase
+    .from("comment")
+    .update({
+      content,
+    })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+};
