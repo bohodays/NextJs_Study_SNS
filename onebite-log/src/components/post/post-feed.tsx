@@ -7,7 +7,7 @@ import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts.data";
 
 const PostFeed = ({ authorId }: { authorId?: string }) => {
   const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
-    useInfinitePostsData();
+    useInfinitePostsData(authorId);
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -24,7 +24,9 @@ const PostFeed = ({ authorId }: { authorId?: string }) => {
   return (
     <div className="flex flex-col gap-10">
       {data.pages.map((page) =>
-        page.map((postId) => <PostItem key={postId} postId={postId} />),
+        page.map((postId) => (
+          <PostItem key={postId} postId={postId} type="FEED" />
+        )),
       )}
 
       {isFetchingNextPage && <Loader />}
